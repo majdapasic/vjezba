@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="450" height="450"  onclick="Crtaj()">
+Your browser does not support the HTML canvas tag.
+</canvas>
+<br>
+<button onclick="Restartuj()" style=" background-color: red ;">Restart</button>
+
+<script>
+var canvasSetup = document.getElementById("myCanvas");
+var ctx = canvasSetup.getContext("2d");
+ctx.beginPath();
+ctx.moveTo(150, 0);
+ctx.lineTo(150, 450);
+ctx.stroke();
+ctx.moveTo(300, 0);
+ctx.lineTo(300, 450);
+ctx.stroke();
+ctx.moveTo(0, 150);
+ctx.lineTo(450, 150);
+ctx.stroke();
+ctx.moveTo(0, 300);
+ctx.lineTo(450, 300);
+ctx.stroke();
+/*
+ctx.moveTo(40, 40);
+ctx.lineTo(140, 140);
+ctx.stroke();
+ctx.moveTo(40, 140);
+ctx.lineTo(140, 40);
+*/
+ctx.stroke();
+var broj = 0;
+ctx.lineWidth = 5;
+
+var polja = ["","","","","","","","",""]; // praćenje stanja table
+
+function provjeriPobjedu() {
+var linije = [
+[0,1,2],[3,4,5],[6,7,8],
+[0,3,6],[1,4,7],[2,5,8],
+[0,4,8],[2,4,6]
+];
+for (var i=0;i<linije.length;i++){
+var a = linije[i][0];
+var b = linije[i][1];
+var c = linije[i][2];
+if(polja[a]!="" && polja[a]==polja[b] && polja[a]==polja[c]){
+alert("Cestitam pobjedniku " + polja[a]);
+return true;
+}
+}
+return false;
+}
+
+function Restartuj(){
+ctx.lineWidth = 1;
+ctx.clearRect(0,0,450,450);
+ctx.beginPath();
+ctx.moveTo(150, 0);
+ctx.lineTo(150, 450);
+ctx.stroke();
+ctx.moveTo(300, 0);
+ctx.lineTo(300, 450);
+ctx.stroke();
+ctx.moveTo(0, 150);
+ctx.lineTo(450, 150);
+ctx.stroke();
+ctx.moveTo(0, 300);
+ctx.lineTo(450, 300);
+ctx.stroke();
+ctx.stroke();
+broj = 0;
+polja = ["","","","","","","","",""];
+}
+
+function Crtaj(){
+ctx.lineWidth = 5;
+elemLeft= myCanvas.offsetLeft + myCanvas.clientLeft;
+elemTop= myCanvas.offsetTop + myCanvas.clientTop;
+var x=event.pageX-elemLeft;
+var y= event.pageY-elemTop;
+if(x<150 & y<150){
+var cur = broj;
+if(broj==0){
+ctx.beginPath();
+ctx.arc(75, 75, 60, 0, 2 * Math.PI);
+ctx.fill();
+    broj=1;
+    }
+    else{
+    ctx.beginPath();
+    ctx.strokeStyle = "yellow";
+    ctx.moveTo(20, 20);
+ctx.lineTo(130, 130);
+ctx.stroke();
+        ctx.moveTo(20, 130);
+ctx.lineTo(130, 20);
+ctx.stroke();
+    broj=0;
+    ctx.beginPath();
+    ctx.strokeStyle = "black";
+    }
+polja[0] = (cur==0 ? "O" : "X");
+provjeriPobjedu();
+    }
+if(x>150 & x<300 & y<150){
+var cur = broj;
+if(broj==0){
+ctx.beginPath();
+ctx.arc(225, 75, 60, 0, 2 * Math.PI);
+ctx.fill();
+    broj=1;
+    }
+    else{
+        ctx.beginPath();
+    ctx.strokeStyle = "yellow";
+    ctx.moveTo(170, 20);
+ctx.lineTo(280, 130);
+ctx.stroke();
+        ctx.moveTo(170, 130);
+ctx.lineTo(280, 20);
+ctx.stroke();
+    broj=0;
+    ctx.beginPath();
+    ctx.strokeStyle = "black";
+    }
+polja[1] = (cur==0 ? "O" : "X");
+provjeriPobjedu();
+    }
+if(x>300 & y<150){
+var cur = broj;
+if(broj==0){
+ctx.beginPath();
+ctx.arc(375, 75, 60, 0, 2 * Math.PI);
+ctx.fill();
+    broj=1;
+    }
+    else{
+        ctx.beginPath();
+    ctx.strokeStyle = "yellow";
+    ctx.moveTo(320, 20);
+ctx.lineTo(430, 130);
+ctx.stroke();
+        ctx.moveTo(320, 130);
+ctx.lineTo(430, 20);
+ctx.stroke();
+    broj=0;
+    ctx.beginPath();
+    ctx.strokeStyle = "black";
+    }
+polja[2] = (cur==0 ? "O" : "X");
+provjeriPobjedu();
+    }
+if(x<150 & y>150 & y<300){
+var cur = broj;
+if(broj==0){
+ctx.beginPath();
+ctx.arc(75, 225, 60, 0, 2 * Math.PI);
+ctx.fill();
+    broj=1;
+    }
+    else{
+        ctx.beginPath();
+    ctx.strokeStyle = "yellow";
+    ctx.moveTo(20, 170);
+ctx.lineTo(130, 280);
+ctx.stroke();
+        ctx.moveTo(20, 280);
+ctx.lineTo(130, 170);
+ctx.stroke();
+    broj=0;
+    ctx.beginPath();
+    ctx.strokeStyle = "black";
+    }
+polja[3] = (cur==0 ? "O" : "X");
+provjeriPobjedu();
+    }
+if(x>150 & x<300 & y>150 & y<300){
+var cur = broj;
+if(broj==0){
+ctx.beginPath();
+ctx.arc(225, 225, 60, 0, 2 * Math.PI);
+ctx.fill();
+    broj=1;
+    }
+    else{
+        ctx.beginPath();
+    ctx.strokeStyle = "yellow";
+    ctx.moveTo(170, 170);
+ctx.lineTo(280, 280);
+ctx.stroke();
+        ctx.moveTo(170, 280);
+ctx.lineTo(280, 170);
+ctx.stroke();
+    broj=0;
+    ctx.beginPath();
+    ctx.strokeStyle = "black";
+    }
+polja[4] = (cur==0 ? "O" : "X");
+provjeriPobjedu();
+    }
+if(x>300 & y>150 & y<300){
+var cur = broj;
+if(broj==0){
+ctx.beginPath();
+ctx.arc(375, 225, 60, 0, 2 * Math.PI);
+ctx.fill();
+    broj=1;
+    }
+    else{
+        ctx.beginPath();
+    ctx.strokeStyle = "yellow";
+    ctx.moveTo(320, 170);
+ctx.lineTo(430, 280);
+ctx.stroke();
+        ctx.moveTo(320, 280);
+ctx.lineTo(430, 170);
+ctx.stroke();
+    broj=0;
+    ctx.beginPath();
+    ctx.strokeStyle = "black";
+    }
+polja[5] = (cur==0 ? "O" : "X");
+provjeriPobjedu();
+    }
+if(x<150 & y>300){
+var cur = broj;
+if(broj==0){
+ctx.beginPath();
+ctx.arc(75, 375, 60, 0, 2 * Math.PI);
+ctx.fill();
+    broj=1;
+    }
+    else{
+        ctx.beginPath();
+    ctx.strokeStyle = "yellow";
+    ctx.moveTo(20, 320);
+ctx.lineTo(130, 430);
+ctx.stroke();
+        ctx.moveTo(20, 430);
+ctx.lineTo(130, 320);
+ctx.stroke();
+    broj=0;
+    ctx.beginPath();
+    ctx.strokeStyle = "black";
+    }
+polja[6] = (cur==0 ? "O" : "X");
+provjeriPobjedu();
+    }
+if(x>150 & x<300 & y>300){
+var cur = broj;
+if(broj==0){
+ctx.beginPath();
+ctx.arc(225, 375, 60, 0, 2 * Math.PI);
+ctx.fill();
+    broj=1;
+    }
+    else{
+        ctx.beginPath();
+    ctx.strokeStyle = "yellow";
+    ctx.moveTo(170, 320);
+ctx.lineTo(280, 430);
+ctx.stroke();
+        ctx.moveTo(170, 430);
+ctx.lineTo(280, 320);
+ctx.stroke();
+    broj=0;
+    ctx.beginPath();
+    ctx.strokeStyle = "black";
+    }
+polja[7] = (cur==0 ? "O" : "X");
+provjeriPobjedu();
+    }
+if(x>300 & y>300){
+var cur = broj;
+if(broj==0){
+ctx.beginPath();
+ctx.arc(375, 375, 60, 0, 2 * Math.PI);
+ctx.fill();
+    broj=1;
+    }
+    else{
+        ctx.beginPath();
+    ctx.strokeStyle = "yellow";
+    ctx.moveTo(320, 320);
+ctx.lineTo(430, 430);
+ctx.stroke();
+        ctx.moveTo(320, 430);
+ctx.lineTo(430, 320);
+ctx.stroke();
+    broj=0;
+    ctx.beginPath();
+    ctx.strokeStyle = "black";
+    }
+polja[8] = (cur==0 ? "O" : "X");
+provjeriPobjedu();
+    }
+}
+</script>
+</body>
+</html>
